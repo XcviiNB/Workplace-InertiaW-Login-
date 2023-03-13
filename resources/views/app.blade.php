@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Workplace</title>
+        <script src="https://kit.fontawesome.com/df9f7c369a.js" crossorigin="anonymous"></script>
 		@vite
 	</head>
 	<body class="bgimg">
@@ -14,7 +15,6 @@
 <style>
     .bgimg {
         background-image: url('/assets/bg.png');
-        background-repeat: no-repeat;
         background-size:100%;
     }
 </style>

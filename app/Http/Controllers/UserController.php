@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index() {
-        $users = User::orderBy('id')->get();
+        $users = User::latest('id')->get();
 
         return inertia('Users/Index', compact('users'));
     }
@@ -35,5 +35,24 @@ class UserController extends Controller
         ]);
 
         return redirect('/users')->with('Info','A new user has been created.');
+    }
+
+    public function edit(User $user) {
+        return inertia('Users.Edit', [
+            'user' => $user
+        ]);
+    }
+
+    public function update(Request $request, User $user) {
+        $editFields = $request->validate([
+            'username'      => 'required|unique:users,username',
+            'fullname'      => 'required|unique:users,fullname',
+            'designation'   => 'required',
+            'department'    =>  'required'
+        ]);
+
+        $user->update($editFields);
+
+        return redirect('/users');
     }
 }

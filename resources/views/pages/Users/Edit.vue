@@ -1,6 +1,5 @@
-<template layout="default">
-
-    <h1 class="text-2xl font-bold mb-4 text-center">User Form</h1>
+<template layout>
+    <h1 class="text-2xl font-bold mb-4 text-center">Edit User : {{ user.fullname }} </h1>
     <hr>
 
     <div class="max-w-md mx-auto shadow p-4 mt-4 bg-white">
@@ -9,11 +8,6 @@
                 <label for="username" class="block font-medium text-black mb-2">User Name</label>
                 <input v-model="form.username" type="text" id="username" name="username" class="w-full border border-gray-400 rounded-sm shadow-sm" />
                 <div class="text-sm text-red-500 italic mt-1" v-if="form.errors.username">{{ form.errors.username }}</div>
-            </div>
-            <div class="mb-4">
-                <label for="password" class="block font-medium text-black mb-2">Password</label>
-                <input v-model="form.password" type="password" id="password" name="password" class="w-full border border-gray-400 rounded-md shadow-sm" />
-                <div class="text-sm text-red-500 italic mt-1" v-if="form.errors.password">{{ form.errors.password }}</div>
             </div>
             <div class="mb-4">
                 <label for="fullname" class="block font-medium text-black mb-2">Full Name</label>
@@ -30,29 +24,33 @@
                 <input v-model="form.department" type="text" id="department" name="department" class="w-full border border-gray-400 rounded-md shadow-sm" />
                 <div class="text-sm text-red-500 italic mt-1" v-if="form.errors.department">{{ form.errors.department }}</div>
             </div>
-            <div class="flex justify-end">
+            <div class="flex justify-evenly">
+                <Link href="/users" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-black bg-slate-400 hover:bg-slate-500">Cancel</Link>
                 <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-black bg-blue-500 hover:bg-blue-700">
-                    Create User
+                    Update User
                 </button>
             </div>
         </form>
     </div>
-
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3'
+    import { useForm, usePage, Link } from '@inertiajs/inertia-vue3'
+    import { setTransitionHooks } from 'vue';
 
-let form = useForm({
-    username:'',
-    password:'',
-    fullname:'',
-    designation:'',
-    department:''
-})
 
-const submit = () => {
-    form.post('/users')
-}
+    const props = defineProps({
+        user: Object
+    })
 
+    let form = useForm({
+        username: props.user.username,
+        fullname: props.user.fullname,
+        designation: props.user.designation,
+        department: props.user.department
+    })
+
+    const submit = () => {
+        form.put('/users/' + props.user.id)
+    }
 </script>
