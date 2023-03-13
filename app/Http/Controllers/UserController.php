@@ -46,7 +46,7 @@ class UserController extends Controller
     public function update(Request $request, User $user) {
         $editFields = $request->validate([
             'username'      => 'required|unique:users,username',
-            'fullname'      => 'required|unique:users,fullname',
+            'fullname'      => 'required',
             'designation'   => 'required',
             'department'    =>  'required'
         ]);

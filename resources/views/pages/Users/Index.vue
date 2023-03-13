@@ -16,7 +16,7 @@
                 <td class="p-3 border-b border-l">{{ user.designation }}</td>
                 <td class="p-3 border-b border-l">{{ user.department }}</td>
                 <td class="p-3 border-b border-l text-center">
-                    <Link :href=" '/users/edit/' + user.id" class="bg-amber-400 border-r rounded"><i class="fa-solid fa-user-pen"></i></Link>
+                    <Link :href=" '/users/edit/' + user.id" class="bg-amber-400 hover:bg-amber-500 border-r rounded"><i class="fa-solid fa-user-pen"></i></Link>
                 </td>
             </tr>
         </table>
